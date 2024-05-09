@@ -44,9 +44,7 @@ const Header = () => {
                                   <NavLinks/>                
                         </section>
                           
-                    </div>
-
-          
+                    </div>        
                 </div>
             </div>
       
@@ -58,12 +56,8 @@ const Header = () => {
                   
                 </div>    
 
-              </nav>
-              
-           
+              </nav>        
              <Buscador/>
-              
-            
             </div>
               
    </header> 

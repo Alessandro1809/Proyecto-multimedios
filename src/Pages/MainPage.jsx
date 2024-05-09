@@ -1,10 +1,11 @@
 import Slider from "../components/Slider";
 import search from '../assets/buscar.png'
+import Bento from "../components/Bento";
 const MainPage = () => {
   return (
     <>
     <div className="flex justify-center w-full lg:hidden md:hidden">
-          <h2 className=" text-2xl tracking-wider text-yellow-300 w-32 h-5 pt-24">ALLRECIPES</h2>
+          <h2 className=" text-2xl tracking-wider text-yellow-300 w-32 h-5 pt-36 font-bold">ALLRECIPES</h2>
     </div>
       <div className="bg-gray-50 w-auto h-screen">
         <Slider/>
@@ -18,7 +19,12 @@ const MainPage = () => {
             </div>
           </div>
           <h2 className="text-center text-4xl font-semibold tracking-widest text-red-400 pt-5">¡Welcome!</h2>
+          
+            <div className="">
+              <Bento/>
+            </div>
          </div>
+        
     </>
   )
 }
