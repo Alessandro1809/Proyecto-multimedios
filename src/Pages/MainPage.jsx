@@ -1,6 +1,7 @@
 import Slider from "../components/Slider";
 import search from '../assets/buscar.png'
 import Bento from "../components/Bento";
+import RecipeList from "../components/RecipeList";
 const MainPage = () => {
   return (
     <>
@@ -19,10 +20,9 @@ const MainPage = () => {
             </div>
           </div>
           <h2 className="text-center text-4xl font-semibold tracking-widest text-red-400 pt-5">¡Welcome!</h2>
-          
-            <div className="">
               <Bento/>
-            </div>
+              <RecipeList/>
+              
          </div>
         
     </>
