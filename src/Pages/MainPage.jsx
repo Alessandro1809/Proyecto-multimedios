@@ -19,7 +19,7 @@ const MainPage = () => {
                     </button>
             </div>
           </div>
-          <h2 className="text-center text-4xl font-semibold tracking-widest text-red-400 pt-5">¡Welcome!</h2>
+          <h2 className="text-center text-xl sm:text-2xl md:text-4xl font-semibold tracking-widest text-red-400 pt-5">¡Welcome!</h2>
               <Bento/>
               <RecipeList/>
               
