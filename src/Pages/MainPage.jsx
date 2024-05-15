@@ -15,7 +15,6 @@ const MainPage = () => {
               <Bento/>
               <RecipeList/>
          </div>
-        
     </>
   )
 }
