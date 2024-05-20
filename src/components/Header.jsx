@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import Menu from "./icons/Menu";
 import Close from "./icons/Close";
 import Buscador from "./Buscador";
 import NavLinks from "./NavLinks";
 import cubiertos from '../assets/cubiertos.png'
+import { Favorite } from "@material-ui/icons";
 const Header = () => {
 
   const [isTopVisible, setTopVisible] = useState(false);
@@ -56,6 +58,7 @@ const Header = () => {
 
               </nav>        
              <Buscador/>
+             <Link to={"/favorite"}><button className="md:ml-8 w-auto h-auto p-2 rounded-full bg-orange-400 transition-all duration-200 hover:bg-orange-500 hover:scale-105"><Favorite/></button></Link>
             </div>
               
    </header> 
