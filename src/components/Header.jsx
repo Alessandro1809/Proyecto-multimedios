@@ -58,7 +58,7 @@ const Header = () => {
 
               </nav>        
              <Buscador/>
-             <Link to={"/favorite"}><button className="md:ml-8 w-auto h-auto p-2 rounded-full bg-orange-400 transition-all duration-200 hover:bg-orange-500 hover:scale-105"><Favorite/></button></Link>
+             <Link to={"/favorite"}><button className="md:ml-8 w-auto h-auto p-2 rounded-full bg-orange-400/50 transition-all duration-200 hover:bg-orange-500 hover:scale-105"><Favorite/></button></Link>
             </div>
               
    </header> 
