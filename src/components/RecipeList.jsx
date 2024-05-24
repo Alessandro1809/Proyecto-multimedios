@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import data from '../data/tipos.json'
-import Rating from '@material-ui/lab/Rating';
-import Box from '@material-ui/core/Box';
-
 const RecipeList = () => {
 
   const [value, setValue] = useState(2);
@@ -27,17 +24,9 @@ const RecipeList = () => {
                   <body className='flex justify-between'>
                       <p className="px-2 py-2 font-medium text-black sm:text-lg md:text-xl tracking-wide">{item.nombre}</p>
                       <div className='p-2'>
-                        {/* <Box component="fieldset" mb={3} borderColor="transparent">
-                          <Rating
-                            name="simple-controlled"
-                            value={value}
-                            onChange={(event, newValue) => {
-                              setValue(newValue);
-                            }}
-                          /></Box> */}
-                      </div>
-                  </body>
                       
+                      </div>
+                  </body> 
                       <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium">{item.description}</p>
               </article>
               
