@@ -14,8 +14,11 @@
     width: 100px;
 }
 .wrapper::-webkit-scrollbar-thumb{
-    background-color: rosybrown;
+    background-color: rgb(255, 50, 50);
     border-radius:20px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    border-width: 2px;
 }
 
 #header-nav {
