@@ -11,7 +11,7 @@
 }
 
 .wrapper::-webkit-scrollbar{
-    width: 100px;
+    width: 40px;
 }
 .wrapper::-webkit-scrollbar-thumb{
     background-color: rgb(255, 50, 50);
@@ -54,4 +54,12 @@
       0 0 40px #d4d4d4,
       0 0 80px #e0e0e0,
       0 0 100px #ffffff;
+  }
+
+  @media screen and (max-width: 768px) {
+    .wrapper::-webkit-scrollbar-thumb{
+
+        background-color: transparent;
+      
+  }
   }
