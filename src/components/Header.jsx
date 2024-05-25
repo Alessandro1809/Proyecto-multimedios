@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Menu from "./icons/Menu";
-import Close from "./icons/Close";
 import Buscador from "./Buscador";
 import NavLinks from "./NavLinks";
 import cubiertos from '../assets/cubiertos.png'
-import { Favorite } from "@material-ui/icons";
+import { Favorite, Menu,Close } from "@material-ui/icons";
 const Header = () => {
 
   const [isTopVisible, setTopVisible] = useState(false);
@@ -18,10 +16,13 @@ const Header = () => {
       <>
         <header id="header-nav" className="fixed top-0 z-50 w-full px-6 py-4">
 
-          <div className="flex justify-between mx-auto max-w-12xl items-center">
-            <img src={cubiertos} alt="logo" className='w-12' />
-            <div className="lg:flex md:flex justify-center -mt-3 hidden">
-                  <h1 className="text-center text-3xl tracking-wider text-orange-400 w-32 h-5 ">ALLRECIPES</h1>
+          <main className="flex justify-between mx-auto max-w-12xl items-center">
+
+            <div className="lg:flex md:flex items-center gap-1 bg-slate-50/50 rounded-lg w-auto h-full p-2">
+              <img src={cubiertos} alt="logo" className='w-12' />
+              <div className="lg:flex md:flex justify-center -mt-3 hidden">
+                    <h1 className=" text-4xl tracking-wider text-orange-400 w-72 h-5 font-medium">ALLRECIPES</h1>
+              </div>
             </div>
 
             <div className="flex justify-center md:hidden lg:hidden">
@@ -29,10 +30,10 @@ const Header = () => {
                   {/* Botón para toggle offcanvas Top */}
                   <button
                     type="button"
-                    className="abrir_cerrar menu_icon inline-flex items-center justify-center px-0.5 py-0.5 text-sm font-semibold text-white bg-transparent border border-transparent rounded-full gap-x-2 hover:shadow-lg hover:shadow-orange-300 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 z-50 -mt-4 top-[50%] left-[50%]"
+                    className="abrir_cerrar bg-slate-50/50 border-red-400 menu_icon inline-flex items-center justify-center p-2 text-sm font-semibold text-white border border-transparent rounded-full gap-x-2 hover:shadow-lg hover:shadow-orange-300 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 z-50 -mt-4 top-[50%] left-[50%] hover:bg-orange-400/80 transition-all duration-300"
                     onClick={toggleTop}
                   >
-                     {isTopVisible ? <Close/> : <Menu/>} 
+                     {isTopVisible ? <Close/> : <Menu style={{ color: 'black' }}/>} 
                   </button>
 
                   {/* Offcanvas Top */}
@@ -40,7 +41,7 @@ const Header = () => {
                      className={`fixed top-0 inset-x-0 transition-all duration-1000 transform ${isTopVisible ? 'translate-y-0' : '-translate-y-full'} max-h-960 h-[100vh] w-full z-80 border-b bg-red-800/90 dark:border-gray-700 ${isTopVisible ? 'translate-y-0' : '-translate-y-full'}`}
                      tabIndex="-1"
                     > 
-                        <section className="flex flex-col text-2xl font-medium tracking-wider text-center text-white text-pretty mt-24 gap-10  ">
+                        <section className="flex flex-col text-2xl font-medium tracking-wider text-center text-white text-pretty mt-32 gap-10  ">
                                   <NavLinks/>                
                         </section>
                           
@@ -59,7 +60,7 @@ const Header = () => {
               </nav>        
              <Buscador/>
              <Link to={"/favorite"}><button className="md:ml-8 w-auto h-auto p-2 rounded-full bg-orange-400/50  transition-all duration-200 hover:bg-orange-500 hover:scale-105 border border-orange-400"><Favorite/></button></Link>
-            </div>
+            </main>
               
    </header> 
           

@@ -4,7 +4,7 @@ const RecipeList = () => {
 
   return (
     <>
-    <main className='bg-gray-50 pb-5'>
+    <main className=' pb-5'>
         <article className='grid justify-center pb-4'>
           <h2 className="text-5xl font-semibold text-center max-w-screen-xl pt-14 tracking-wider h-auto pb-4"><span className="text-orange-400">300+</span> Recipes</h2>
           <p className=' text-xl font-medium tracking-wide mx-4'>Explore all the delicious recipes for <span className="text-orange-400">all tastes</span> in our catalog!</p>
