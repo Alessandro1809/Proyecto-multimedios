@@ -15,7 +15,6 @@ const MainPage = () => {
             <Slider/>
             <BodySearch/> 
           </div>
-
             <section>
               <h2 className="text-center text-4xl sm:text-4xl md:text-5xl font-semibold tracking-widest text-red-400">¡<span className="text-black">Welcome</span>!</h2>
               <Bento/>
