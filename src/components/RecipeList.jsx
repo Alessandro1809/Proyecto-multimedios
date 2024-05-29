@@ -1,7 +1,12 @@
 import data from '../data/tipos.json'
 import { Favorite } from '@material-ui/icons';
+import { useRecipe } from '../api/recipes';
 const RecipeList = () => {
-
+const {agregarFavoritos,existeStorage} = useRecipe();
+  const handleFavorite = (receta) => {
+    existeStorage(receta.id);
+    agregarFavoritos(receta);
+  }
 
   return (
     <>
@@ -30,7 +35,7 @@ const RecipeList = () => {
                       <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty">{item.description}</p>
                   <footer className='flex justify-between w-auto'>
                   <button className='mx-2 my-4 w-auto h-auto p-2 text-lg  transition-all duration-300 md:w-40 hover:bg-orange-400 md:text-lg border border-orange-500 rounded-lg'>View Recipe</button>
-                  <button className='mx-2 my-4 w-auto h-auto p-2 text-lg  transition-all duration-300 md:w-40 hover:bg-rose-400 border-b border-rose-400 md:text-lg rounded-lg'>Add to {<Favorite />}</button>
+                  <button onClick={(e) => handleFavorite({id:item.id,nombre:item.nombre,img:item.img,description:item.description})} className='mx-2 my-4 w-auto h-auto p-2 text-lg  transition-all duration-300 md:w-40 hover:bg-rose-400 border-b border-rose-400 md:text-lg rounded-lg'>Add to {<Favorite />}</button>
                   </footer>
               </article>
               
