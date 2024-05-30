@@ -5,7 +5,6 @@ export const useRecipe = () => {
     const [favs, setFavs] = useState(obtenerFavoritos() || []);
     const [aumento, setAumento] = useState(true);//bandera de cambio para useEffect
 
-
     const agregarFavoritos = (receta) => {
         if(existeStorage(receta.id)){
             return;
