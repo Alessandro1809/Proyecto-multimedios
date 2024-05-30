@@ -2,19 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useRecipe } from '../api/recipes';
 
 const Slider = () => {
-  const [bandera, setBandera] = useState(true);//bandera para detectar cambios
-  const { favs, actualizarFavoritos} = useRecipe();
-  
-  const prevFavsRef = useRef(favs);
+  const { favs, actualizarFavoritos } = useRecipe();
 
-  
-  // useEffect para actualizar la referencia previa y verificar cambios en favs
+  // useEffect para actualizar favoritos cada vez que cambian
   useEffect(() => {
-    if (prevFavsRef.current !== favs) {
-      prevFavsRef.current = favs;// Actualiza la referencia previa  
-    }
+    
     actualizarFavoritos();
-  },[]);
+  }, []);
   
   return (
     <>
