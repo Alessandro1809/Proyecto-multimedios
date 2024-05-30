@@ -2,30 +2,24 @@ import { useState, useEffect, useRef } from 'react';
 import { useRecipe } from '../api/recipes';
 
 const Slider = () => {
-  const { obtenerFavoritos } = useRecipe();
-  const [favs, setFavs] = useState(obtenerFavoritos() || []);
-
-  const actualizarFavoritos = () => {
-    const nuevosFavoritos = obtenerFavoritos() || [];
-    setFavs([...nuevosFavoritos]); // Create a new copy
-  };
-
+  const { favs,setFavs, obtenerFavoritos, actualizarFavoritos} = useRecipe();
+  
   const prevFavsRef = useRef(favs);
 
-  useEffect(() => {
-    if (favs !== prevFavsRef.current) {
-      actualizarFavoritos();
-    }
-    
-    prevFavsRef.current = [...favs]; // Update reference with a new copy
-    
-  },[FAVS]);
 
+  // useEffect para actualizar la referencia previa y verificar cambios en favs
+  useEffect(() => {
+    if (prevFavsRef.current !== favs) {
+      prevFavsRef.current = favs;// Actualiza la referencia previa
+      
+    }
+    actualizarFavoritos();
+  },[favs]);
 
   return (
     <>
     <div className="wrapper max-h-1500px flex overflow-x-auto pt-16 pb-4 lg:pt-40 md:pt-40 mb-12">
-        {favs?.map((item) =>(
+        {prevFavsRef.current?.map((item) =>(
             <>  
             <div key={item.id} className='justify-center items-center grid'>
                 <div className="  w-[110px] h-[110px] flex items-center justify-center bg-blue-400/50 rounded-full mx-2 transition-all duration-300 hover:scale-110">
@@ -43,5 +37,4 @@ const Slider = () => {
     </>
   )
 }
-
 export default Slider;
