@@ -2,10 +2,19 @@ import Slider from "../components/Slider";
 import BodySearch from "../components/BodySearch";
 import Bento from "../components/Bento";
 import RecipeList from "../components/RecipeList";
-
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
 const MainPage = () => {
+  const notify = () => toast("¡Bienvenido de nuevo!");
+
+  useEffect(() => {
+    notify();
+  }, []);
+
   return (
     <>
+    <ToastContainer />
     <div className=" top-0 z-[-10] h-full w-full bg-white bg-[radial-gradient(ellipse_40%_90%_at_60%_10%,rgba(74,206,255,0.4),rgba(255,123,13,0))]">
     
       <div className="flex justify-center w-full lg:hidden md:hidden  pb-8">
