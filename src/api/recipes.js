@@ -1,12 +1,20 @@
 //funciones de consumo del api de recetas
-const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
 import { useState } from "react";
+
 export const useRecipe = () => {
     const [favs, setFavs] = useState(obtenerFavoritos() || []);
+    const [aumento, setAumento] = useState(true);//bandera de cambio para useEffect
+
+
     const agregarFavoritos = (receta) => {
+        if(existeStorage(receta.id)){
+            return;
+        }
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
         localStorage.setItem('favoritos', JSON.stringify([...favoritos, receta]));
         setFavs([...favoritos, receta]);
+    ;
+        
     };
     function existeStorage(id){
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
@@ -30,6 +38,9 @@ export const useRecipe = () => {
         existeStorage,
         obtenerFavoritos,
         favs,
-        setFavs
+        setFavs,
+        setAumento,
+        aumento,
+       
     }
 }
