@@ -7,7 +7,6 @@ const Slider = () => {
 
   // useEffect para actualizar favoritos cada vez que cambian
   useEffect(() => {
-    
     actualizarFavoritos();
   }, []);
   

@@ -75,3 +75,15 @@
     }
     
   }
+  .appear{
+    view-timeline-name: --appear;
+    view-timeline-axis: block;
+
+    animation-timeline: --appear;
+    animation-name: show;
+
+    animation-range: entry 20% cover 40%;
+    animation-fill-mode: both;
+
+
+  }

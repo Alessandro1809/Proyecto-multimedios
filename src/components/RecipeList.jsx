@@ -21,7 +21,7 @@ const {agregarFavoritos,existeStorage, eliminarFavoritos} = useRecipe();
    
     <main className='pb-5'>
       
-        <article className='grid justify-center pb-4'>
+        <article className='grid justify-center pb-4 appear'>
           <h2 className="text-5xl font-semibold text-center max-w-screen-xl pt-14 tracking-wider h-auto pb-4 text-pretty"><span className="text-orange-400">300+</span> Recipes</h2>
           <p className=' text-xl font-medium tracking-wide mx-4 text-pretty'>Explore all the delicious recipes for <span className="text-orange-400">all tastes</span> in our catalog!</p>
         </article>
@@ -32,7 +32,7 @@ const {agregarFavoritos,existeStorage, eliminarFavoritos} = useRecipe();
               <div className='p-4 grid gap-5 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 md:mx-0.5 col-auto'>
               {data.data.map((item) =>(
               
-              <article key={item.id} className="bg-gray-200 min-w-[150px] md:min-w-[180px] h-auto rounded-lg flex justify-center flex-col transition-all duration-600 hover:scale-100 hover:bg-gray-100 group drop-shadow-md">
+              <article key={item.id} className="appear bg-gray-200 min-w-[150px] md:min-w-[180px] h-auto rounded-lg flex justify-center flex-col transition-all duration-600 hover:scale-100 hover:bg-gray-100 group drop-shadow-md">
                   <a href="" className="group relative flex flex-col overflow-hidden rounded-t-lg px-4 pt-52 ">
                   <img className="absolute inset-0 h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out" src={item.img} alt="" />
                   </a>
