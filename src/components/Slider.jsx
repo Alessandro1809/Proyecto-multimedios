@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useRecipe } from '../api/recipes';
+import { useRecipe } from '../api/hooks/recipes';
 import { CloseRounded } from '@material-ui/icons';
 
 const Slider = () => {

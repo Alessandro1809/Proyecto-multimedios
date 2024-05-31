@@ -1,25 +1,60 @@
 import { useState, useEffect } from "react";
-
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 export const useRecipe = () => {
     const [favs, setFavs] = useState(obtenerFavoritos() || []);
 
     const agregarFavoritos = (receta) => {
+        const warnNotify = () => toast.warn("¡Este elemento ya existe en favoritos!", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+            });
+        const notify = () => toast.success("¡Se ha agregado correctamente a favoritos!", {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+            });
+        
         if (existeStorage(receta.id)) {
-            return;
+            return warnNotify();
         }
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
         const nuevosFavoritos = [...favoritos, receta];
         localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
         setFavs(nuevosFavoritos); // Actualizar estado favs
         window.dispatchEvent(new CustomEvent('favoritosActualizados')); // Disparar evento personalizado
+        notify();
+        
     };
 
     const eliminarFavoritos = (id) => {
+        const notify = () => toast.error("¡Se ha eliminado correctamente de favoritos!", {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+            });
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
         const nuevosFavoritos = favoritos.filter(receta => receta.id !== id);
         localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
         setFavs(nuevosFavoritos); // Actualizar estado favs
         window.dispatchEvent(new CustomEvent('favoritosActualizados')); // Disparar evento personalizado
+        notify();
     };
 
     function existeStorage(id) {
@@ -59,5 +94,6 @@ export const useRecipe = () => {
         obtenerFavoritos,
         favs,
         setFavs,
+        ToastContainer
     }
 }

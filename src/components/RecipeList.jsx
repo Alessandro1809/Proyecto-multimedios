@@ -1,8 +1,11 @@
 import data from '../data/tipos.json'
 import { Favorite } from '@material-ui/icons';
-import { useRecipe } from '../api/recipes';
+import { useRecipe } from '../api/hooks/recipes';
+
 const RecipeList = () => {
-const {agregarFavoritos,existeStorage} = useRecipe();
+
+
+const {agregarFavoritos,existeStorage, ToastContainer} = useRecipe();
   const handleFavorite = (receta) => {
     existeStorage(receta.id);
     agregarFavoritos(receta);
@@ -10,7 +13,10 @@ const {agregarFavoritos,existeStorage} = useRecipe();
 
   return (
     <>
+   
+   
     <main className='pb-5'>
+      
         <article className='grid justify-center pb-4'>
           <h2 className="text-5xl font-semibold text-center max-w-screen-xl pt-14 tracking-wider h-auto pb-4 text-pretty"><span className="text-orange-400">300+</span> Recipes</h2>
           <p className=' text-xl font-medium tracking-wide mx-4 text-pretty'>Explore all the delicious recipes for <span className="text-orange-400">all tastes</span> in our catalog!</p>
