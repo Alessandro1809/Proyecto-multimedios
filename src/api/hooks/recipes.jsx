@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 export const useRecipe = () => {
     const [favs, setFavs] = useState(obtenerFavoritos() || []);
@@ -7,22 +7,12 @@ export const useRecipe = () => {
     const agregarFavoritos = (receta) => {
         const warnNotify = () => toast.warn("¡Este elemento ya existe en favoritos!", {
             position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
+            autoClose: 2500,
             theme: "light"
             });
         const notify = () => toast.success("¡Se ha agregado correctamente a favoritos!", {
             position: "top-center",
             autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
             theme: "light"
             });
         
@@ -42,11 +32,6 @@ export const useRecipe = () => {
         const notify = () => toast.error("¡Se ha eliminado correctamente de favoritos!", {
             position: "top-center",
             autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
             theme: "light"
             });
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
@@ -93,7 +78,6 @@ export const useRecipe = () => {
         existeStorage,
         obtenerFavoritos,
         favs,
-        setFavs,
-        ToastContainer
+        setFavs
     }
 }

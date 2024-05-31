@@ -5,10 +5,14 @@ import { useRecipe } from '../api/hooks/recipes';
 const RecipeList = () => {
 
 
-const {agregarFavoritos,existeStorage, ToastContainer} = useRecipe();
+const {agregarFavoritos,existeStorage, eliminarFavoritos} = useRecipe();
   const handleFavorite = (receta) => {
     existeStorage(receta.id);
     agregarFavoritos(receta);
+  }
+
+  const handleDelete = (id) => {
+    eliminarFavoritos(id);
   }
 
   return (
@@ -41,7 +45,13 @@ const {agregarFavoritos,existeStorage, ToastContainer} = useRecipe();
                       <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty">{item.description}</p>
                   <footer className='flex justify-between w-auto'>
                   <button className='mx-2 my-4 w-auto h-auto p-2 text-lg  transition-all duration-300 md:w-40 hover:bg-orange-400 md:text-lg border border-orange-500 rounded-lg'>View Recipe</button>
-                  <button onClick={(e) => handleFavorite({id:item.id,nombre:item.nombre,img:item.img,description:item.description})} className='mx-2 my-4 w-auto h-auto p-2 text-lg  transition-all duration-300 md:w-40 hover:bg-rose-400 border-b border-rose-400 md:text-lg rounded-lg'>Add to {<Favorite />}</button>
+
+                  {existeStorage(item.id) ? 
+
+                  <button onClick={(e) => handleDelete(item.id)} className='mx-2 my-4 w-auto h-auto p-2 text-lg bg-rose-400 transition-all duration-300 md:w-40 hover:bg-rose-400/80 border-b border-rose-400 md:text-lg rounded-lg'>Remove to {<Favorite />}</button> 
+                  : 
+                  <button onClick={(e) => handleFavorite({id:item.id,nombre:item.nombre,img:item.img,description:item.description})} className='mx-2 my-4 w-auto h-auto p-2 text-lg  transition-all duration-300 md:w-40 hover:bg-rose-400 border-b border-rose-400 md:text-lg rounded-lg'>Add to {<Favorite />}</button>}
+
                   </footer>
               </article>
               
