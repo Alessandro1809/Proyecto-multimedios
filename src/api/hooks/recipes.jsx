@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 export const useRecipe = () => {
+    
     const [favs, setFavs] = useState(obtenerFavoritos() || []);
 
     const agregarFavoritos = (receta) => {
-        const warnNotify = () => toast.warn("¡Este elemento ya existe en favoritos!", {
+        
+        const warnNotify = () => toast.warn("¡Este elemento ya existe en favoritos!" , {
             position: "top-center",
             autoClose: 2500,
             theme: "light"

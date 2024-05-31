@@ -1,24 +1,39 @@
 import data from '../data/tipos.json'
+import { useState } from 'react';
 import { Favorite } from '@material-ui/icons';
 import { useRecipe } from '../api/hooks/recipes';
-
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 const RecipeList = () => {
 
-
 const {agregarFavoritos,existeStorage, eliminarFavoritos} = useRecipe();
+
+const [open, setOpen] = useState(false);
+
+const onOpenModal = () => setOpen(true);
+const onCloseModal = () => setOpen(false);
+
   const handleFavorite = (receta) => {
     existeStorage(receta.id);
     agregarFavoritos(receta);
   }
 
   const handleDelete = (id) => {
-    eliminarFavoritos(id);
+    const resultado = window.confirm('¿Seguro que quieres eliminarlo de favoritos?');
+    if (resultado) { eliminarFavoritos(id); }
+    
+    return ;
   }
 
   return (
     <>
-   
-   
+              {/* <Modal open={open} onClose={onCloseModal} center>
+              <div className='p-6'>
+              <h2 className='text-xl font-medium'>¿Desea eliminar <span className="text-red-400 font-bold">permanentemente</span> de el elemento de favoritos?</h2>
+              </div>
+              <button onClick={(e) => handleDelete(item.id)} className='mx-2 my-4 w-auto h-auto p-2 text-lg bg-rose-400 transition-all duration-300 md:w-40 hover:bg-rose-400/80 border-b border-rose-400 md:text-lg rounded-lg'>Remove to {<Favorite />}</button>
+              </Modal> */}
+              
     <main className='pb-5'>
       
         <article className='grid justify-center pb-4 appear'>
@@ -27,7 +42,6 @@ const {agregarFavoritos,existeStorage, eliminarFavoritos} = useRecipe();
         </article>
         
         <section className='grid justify-center'>
-            
             <div>
               <div className='p-4 grid gap-5 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 md:mx-0.5 col-auto'>
               {data.data.map((item) =>(
@@ -48,18 +62,19 @@ const {agregarFavoritos,existeStorage, eliminarFavoritos} = useRecipe();
 
                   {existeStorage(item.id) ? 
 
-                  <button onClick={(e) => handleDelete(item.id)} className='mx-2 my-4 w-auto h-auto p-2 text-lg bg-rose-400 transition-all duration-300 md:w-40 hover:bg-rose-400/80 border-b border-rose-400 md:text-lg rounded-lg'>Remove to {<Favorite />}</button> 
+                  <button onClick={(e) => onOpenModal(e)} className='mx-2 my-4 w-auto h-auto p-2 text-lg bg-rose-400 transition-all duration-300 md:w-40 hover:bg-rose-400/80 border-b border-rose-400 md:text-lg rounded-lg'>Remove to {<Favorite />}</button> 
                   : 
                   <button onClick={(e) => handleFavorite({id:item.id,nombre:item.nombre,img:item.img,description:item.description})} className='mx-2 my-4 w-auto h-auto p-2 text-lg  transition-all duration-300 md:w-40 hover:bg-rose-400 border-b border-rose-400 md:text-lg rounded-lg'>Add to {<Favorite />}</button>}
 
                   </footer>
               </article>
-              
+        
               ))}
+              
               </div>
             </div>
         </section>
-
+           
       </main>
     </>
   )
