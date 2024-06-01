@@ -33,7 +33,7 @@ const Slider = () => {
     <Modal open={open} onClose={onCloseModal} center>
       <div className='p-6'>
         <h2 className='text-xl font-medium'>
-          ¿Desea eliminar <span className="text-red-400 font-bold">permanentemente</span> el elemento de favoritos?
+          ¿You want to <span className="text-red-400 font-bold">permanently remove</span> the item from favorites?
         </h2>
       </div>
       <footer className='flex justify-center'>
@@ -74,8 +74,8 @@ const Slider = () => {
         </div>
       ) : (
         <div className='text-center flex flex-col items-center pt-16 pb-4 lg:pt-40 md:pt-40 mb-12 mx-2 tracking-wider'>
-          <h3 className='md:text-4xl text-2xl'>No tienes <span className='text-pretty text-red-400 font-semibold'>favoritos</span> aun!</h3>
-          <h3 className='md:text-xl text-lg'>Agrega aqui tus favoritos para tener acceso rapidamente a las recetas que mas te gusten</h3> 
+          <h3 className='md:text-4xl text-2xl'>You don't have <span className='text-pretty text-red-400 font-semibold'>favorites</span> yet!</h3>
+          <h3 className='md:text-xl text-lg'>Add your favorites here to quickly have access to the recipes you like the most</h3> 
         </div>
       )}
     </>

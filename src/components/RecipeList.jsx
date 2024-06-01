@@ -35,7 +35,7 @@ const RecipeList = () => {
     <Modal open={open} onClose={onCloseModal} center>
       <div className='p-6'>
         <h2 className='text-xl font-medium'>
-          ¿Desea eliminar <span className="text-red-400 font-bold">permanentemente</span> el elemento de favoritos?
+          ¿You want to <span className="text-red-400 font-bold">permanently remove</span> the item from favorites?
         </h2>
       </div>
       <footer className='flex justify-center'>
@@ -51,9 +51,8 @@ const RecipeList = () => {
         onClick={handleDelete}
         className='delete mx-2 my-4 w-auto h-auto p-2 text-lg bg-rose-400 transition-all duration-300 md:w-40 hover:bg-rose-400/80 border-b border-rose-400 md:text-lg rounded-lg'
       >
-        Delete to {<Favorite/>}
+        Remove to {<Favorite/>}
       </button>
-      
       </footer>
     </Modal>
 
