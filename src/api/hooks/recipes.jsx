@@ -6,6 +6,7 @@ import axios from "axios";
 export const useRecipe = () => {
     
     const [favs, setFavs] = useState(obtenerFavoritos() || []);
+    const [recipes, setRecipes] = useState([]);
     const muestraTodasLasRecetas = async () => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?f=c`);
