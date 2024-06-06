@@ -1,10 +1,10 @@
+import { useEffect } from "react";
 import Slider from "../components/Slider";
 import BodySearch from "../components/BodySearch";
 import Bento from "../components/Bento";
 import RecipeList from "../components/RecipeList";
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from "react";
+import 'react-toastify/dist/ReactToastify.css';
 const MainPage = () => {
   const notify = () => toast("¡Welcome to AllRecipes!");
 

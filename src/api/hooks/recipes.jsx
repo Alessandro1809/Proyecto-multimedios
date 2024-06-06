@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import axios from "axios";
 
 export const useRecipe = () => {
     
     const [favs, setFavs] = useState(obtenerFavoritos() || []);
-
+    const muestraTodasLasRecetas = async () => {
+        try {
+            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?f=c`);
+            const { meals } = response.data;
+            return meals;
+        } catch (error) {
+            console.error('Error fetching the recipes:', error);
+            return [];
+        }
+    }
+   
     const agregarFavoritos = (receta) => {
         
         const warnNotify = () => toast.warn("¡This element is already in favorites!" , {
@@ -82,6 +92,7 @@ export const useRecipe = () => {
         existeStorage,
         obtenerFavoritos,
         favs,
-        setFavs
+        setFavs,
+        muestraTodasLasRecetas
     }
 }

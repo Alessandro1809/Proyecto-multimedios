@@ -1,14 +1,15 @@
-import data from '../data/tipos.json'
-import { useState } from 'react';
-import { Favorite,Cancel } from '@material-ui/icons';
+import { useState, useEffect } from 'react';
+import { Favorite,Cancel,ListAltOutlined } from '@material-ui/icons';
 import { useRecipe } from '../api/hooks/recipes';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
 const RecipeList = () => {
-  const { agregarFavoritos, existeStorage, eliminarFavoritos } = useRecipe();
+  const { agregarFavoritos, existeStorage, eliminarFavoritos, muestraTodasLasRecetas } = useRecipe();
   const [open, setOpen] = useState(false);
   const [currentId, setCurrentId] = useState(null); // Estado para almacenar el id de cada receta que se quiera eliminar
+  const [meal, setMeal] = useState([]);
+
 
   const onOpenModal = (id) => {
     setCurrentId(id); 
@@ -29,6 +30,17 @@ const RecipeList = () => {
     eliminarFavoritos(currentId); 
     onCloseModal(); 
   };
+
+ 
+
+    useEffect(() => {
+        const fetchRecetas = async () => {
+            const meals = await muestraTodasLasRecetas();
+            setMeal(meals);
+        };
+
+        fetchRecetas();
+    }, []);
 
   return (
     <>
@@ -69,25 +81,26 @@ const RecipeList = () => {
       <section className='grid justify-center'>
         <div>
           <div className='p-4 grid gap-5 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 md:mx-0.5 col-auto'>
-            {data.data.map((item) => (
-              <article key={item.id} className="appear bg-gray-200 min-w-[150px] md:min-w-[180px] h-auto rounded-lg flex justify-center flex-col transition-all duration-600 hover:scale-100 hover:bg-gray-100 group drop-shadow-md">
+            {meal.map((item) => (
+              <article key={item.idMeal} className="appear bg-gray-200 min-w-[150px] md:min-w-[180px] h-auto rounded-lg flex justify-center flex-col transition-all duration-600 hover:scale-100 hover:bg-gray-100 group drop-shadow-md">
                 <a href="" className="group relative flex flex-col overflow-hidden rounded-t-lg px-4 pt-52">
-                  <img className="absolute inset-0 h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out" src={item.img} alt="" />
+                  <img className="absolute inset-0 h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out" src={item.strMealThumb} alt="" />
                 </a>
                 <article className='flex justify-between'>
-                  <p className="px-2 py-2 font-semibold text-black sm:text-lg md:text-xl tracking-wide">{item.nombre}</p>
+                  <p className="px-2 py-2 font-semibold text-black sm:text-lg md:text-xl tracking-wide">{item.strMeal}</p>
                   <div className='p-2'></div>
                 </article>
-                <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty">{item.description}</p>
+                <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty"><ListAltOutlined/>{item.strCategory}</p>
+                <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty">{item.strInstructions}</p>
                 <footer className='flex justify-between w-auto'>
                   <button className='mx-2 my-4 w-auto h-auto p-2 text-lg transition-all duration-300 md:w-40 hover:bg-orange-400 md:text-lg border border-orange-500 rounded-lg'>View Recipe</button>
 
-                  {existeStorage(item.id) ? 
-                    <button onClick={() => onOpenModal(item.id)} className='mx-2 my-4 w-auto h-auto p-2 text-lg bg-rose-400 transition-all duration-300 md:w-40 hover:bg-rose-400/80 border-b border-rose-400 md:text-lg rounded-lg'>
+                  {existeStorage(item.idMeal) ? 
+                    <button onClick={() => onOpenModal(item.idMeal)} className='mx-2 my-4 w-auto h-auto p-2 text-lg bg-rose-400 transition-all duration-300 md:w-40 hover:bg-rose-400/80 border-b border-rose-400 md:text-lg rounded-lg'>
                       Remove to {<Favorite />}
                     </button>
                     : 
-                    <button onClick={() => handleFavorite({ id: item.id, nombre: item.nombre, img: item.img, description: item.description })} className='mx-2 my-4 w-auto h-auto p-2 text-lg transition-all duration-300 md:w-40 hover:bg-rose-400 border-b border-rose-400 md:text-lg rounded-lg'>
+                    <button onClick={() => handleFavorite({ id: item.idMeal, nombre: item.strMeal, img: item.strMealThumb, description: item.strInstructions, category: item.strCategory })} className='mx-2 my-4 w-auto h-auto p-2 text-lg transition-all duration-300 md:w-40 hover:bg-rose-400 border-b border-rose-400 md:text-lg rounded-lg'>
                       Add to {<Favorite />}
                     </button>
                   }
