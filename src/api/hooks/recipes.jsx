@@ -9,12 +9,12 @@ export const useRecipe = () => {
 
     const agregarFavoritos = (receta) => {
         
-        const warnNotify = () => toast.warn("¡Este elemento ya existe en favoritos!" , {
+        const warnNotify = () => toast.warn("¡This element is already in favorites!" , {
             position: "top-center",
             autoClose: 2500,
             theme: "light"
             });
-        const notify = () => toast.success("¡Se ha agregado correctamente a favoritos!", {
+        const notify = () => toast.success("¡Corrrectly added to favorites!", {
             position: "top-center",
             autoClose: 2500,
             theme: "light"
@@ -33,7 +33,7 @@ export const useRecipe = () => {
     };
 
     const eliminarFavoritos = (id) => {
-        const notify = () => toast.error("¡Se ha eliminado correctamente de favoritos!", {
+        const notify = () => toast.error("¡This element was removed from favorites!", {
             position: "top-center",
             autoClose: 2500,
             theme: "light"
