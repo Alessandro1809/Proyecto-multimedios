@@ -7,12 +7,24 @@ export const useRecipe = () => {
     
     const [favs, setFavs] = useState(obtenerFavoritos() || []);
     const [recipes, setRecipes] = useState([]);//estado global de recetas
-    const muestraTodasLasRecetas = async () => {
+    const muestraTodasLasRecetas = async () => {    
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?f=c`);
             const { meals } = response.data;
            
             return meals;
+        } catch (error) {
+            console.error('Error fetching the recipes:', error);
+            return [];
+        }
+    }
+
+    const filtraLasRecetas = async (recipe) => {
+        try {
+            const response = await axios.get(`www.themealdb.com/api/json/v1/1/filter.php?c=${recipe}`);
+             const { meals } = response.data;
+             
+             return meals;
         } catch (error) {
             console.error('Error fetching the recipes:', error);
             return [];
@@ -96,6 +108,6 @@ export const useRecipe = () => {
         favs,
         setFavs,
         muestraTodasLasRecetas,
-        
+        filtraLasRecetas
     }
 }

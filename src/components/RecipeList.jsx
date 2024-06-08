@@ -35,7 +35,8 @@ const RecipeList = () => {
   useEffect(() => {
     const fetchRecetas = async () => {
       const meals = await muestraTodasLasRecetas();
-      setMeal(meals);
+      meal ? setMeal(meals) : setMeal([]); 
+
     };
 
     fetchRecetas();
