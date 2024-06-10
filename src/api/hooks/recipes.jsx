@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext, useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import { RecipeContext } from '../../context/RecipeContext.jsx';  // Asegúrate de importar el contexto adecuado
 
 export const useRecipe = () => {
+    const { recipes, setRecipes, favs, setFavs } = useContext(RecipeContext);
     
-    const [favs, setFavs] = useState(obtenerFavoritos() || []);
-    const [recipes, setRecipes] = useState([]);//estado global de recetas
-    const muestraTodasLasRecetas = async () => {    
+    const muestraTodasLasRecetas = async () => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?f=c`);
             const { meals } = response.data;
@@ -22,10 +22,8 @@ export const useRecipe = () => {
     const filtraLasRecetas = async (recipe) => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${recipe}`);
-            
-             const { meals } = response.data;
-             
-             return meals;
+            const { meals } = response.data;
+            return meals;
         } catch (error) {
             console.error('Error fetching the recipes:', error);
             return [];
@@ -33,18 +31,17 @@ export const useRecipe = () => {
     }
    
     const agregarFavoritos = (receta) => {
-        
         const warnNotify = () => toast.warn("¡This element is already in favorites!" , {
             position: "top-center",
             autoClose: 2500,
             theme: "light"
-            });
+        });
         const notify = () => toast.success("¡Corrrectly added to favorites!", {
             position: "top-center",
             autoClose: 2500,
             theme: "light"
-            });
-        
+        });
+
         if (existeStorage(receta.id)) {
             return warnNotify();
         }
@@ -54,7 +51,6 @@ export const useRecipe = () => {
         setFavs(nuevosFavoritos); // Actualizar estado favs
         window.dispatchEvent(new CustomEvent('favoritosActualizados')); // Disparar evento personalizado
         notify();
-        
     };
 
     const eliminarFavoritos = (id) => {
@@ -62,7 +58,7 @@ export const useRecipe = () => {
             position: "top-center",
             autoClose: 2500,
             theme: "light"
-            });
+        });
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
         const nuevosFavoritos = favoritos.filter(receta => receta.id !== id);
         localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
@@ -112,5 +108,5 @@ export const useRecipe = () => {
         filtraLasRecetas,
         setRecipes,
         recipes
-    }
-}
+    };
+};

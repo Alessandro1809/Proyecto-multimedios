@@ -3,10 +3,11 @@ import AllRecipesLayout from './layout/AllRecipesLayout';
 import MainPage from './Pages/MainPage';
 import Recipe from './Pages/Recipe';
 import Favorites from './Pages/Favorites';
+import { RecipeProvider } from './context/RecipeContext';
 function App() {
   
   return (
-    
+    <RecipeProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AllRecipesLayout/>}>
@@ -16,7 +17,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-    
+    </RecipeProvider>
   )
 }
 
