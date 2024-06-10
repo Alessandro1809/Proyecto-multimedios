@@ -3,7 +3,7 @@ import { Favorite, Cancel, ListAltOutlined,NavigateNext,NavigateBefore } from '@
 import { useRecipe } from '../api/hooks/recipes';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-
+//pendiente revisar el bug en visualizacion de imagenes en el listado de recetas 
 const RecipeList = () => {
   const { agregarFavoritos, existeStorage, eliminarFavoritos, muestraTodasLasRecetas, recipes} = useRecipe();
   const [open, setOpen] = useState(false);
