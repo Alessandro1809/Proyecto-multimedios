@@ -11,7 +11,7 @@ export const useRecipe = () => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?f=c`);
             const { meals } = response.data;
-           
+            console.log(recipes);
             return meals;
         } catch (error) {
             console.error('Error fetching the recipes:', error);
@@ -21,7 +21,8 @@ export const useRecipe = () => {
 
     const filtraLasRecetas = async (recipe) => {
         try {
-            const response = await axios.get(`www.themealdb.com/api/json/v1/1/filter.php?c=${recipe}`);
+            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${recipe}`);
+            
              const { meals } = response.data;
              
              return meals;
@@ -108,6 +109,8 @@ export const useRecipe = () => {
         favs,
         setFavs,
         muestraTodasLasRecetas,
-        filtraLasRecetas
+        filtraLasRecetas,
+        setRecipes,
+        recipes
     }
 }

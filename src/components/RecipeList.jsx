@@ -5,12 +5,12 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
 const RecipeList = () => {
-  const { agregarFavoritos, existeStorage, eliminarFavoritos, muestraTodasLasRecetas } = useRecipe();
+  const { agregarFavoritos, existeStorage, eliminarFavoritos, muestraTodasLasRecetas, recipes} = useRecipe();
   const [open, setOpen] = useState(false);
-  const [currentId, setCurrentId] = useState(null); // Estado para almacenar el id de cada receta que se quiera eliminar
+  const [currentId, setCurrentId] = useState(null); 
   const [meal, setMeal] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const recipesPerPage = 20; // Número de recetas por página
+  const recipesPerPage = 20;
 
   const onOpenModal = (id) => {
     setCurrentId(id); 
@@ -35,12 +35,20 @@ const RecipeList = () => {
   useEffect(() => {
     const fetchRecetas = async () => {
       const meals = await muestraTodasLasRecetas();
-      meal ? setMeal(meals) : setMeal([]); 
-
+      setMeal(meals);
     };
-
+    
     fetchRecetas();
   }, []);
+
+
+  useEffect(() => {
+    if (recipes && recipes.length > 0) {
+      console.log("recetas actualizadas",recipes);
+      setMeal(recipes);
+    }
+    
+  }, [recipes]);
 
   // Calcular las recetas que se deben mostrar en la página actual
   const indexOfLastRecipe = currentPage * recipesPerPage;
