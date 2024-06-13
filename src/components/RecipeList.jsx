@@ -97,9 +97,9 @@ const RecipeList = () => {
           <div>
             <div className='p-4 grid gap-5 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 md:mx-0.5 col-auto'>
               {currentRecipes.map((item) => (
-                <article key={item.idMeal} className="appear bg-gray-200 min-w-[150px] md:min-w-[180px] h-full rounded-lg flex justify-center flex-col transition-all duration-600 hover:scale-100 hover:bg-gray-100 group drop-shadow-md">
-                  <a href="" className="group relative overflow-hidden rounded-t-lg px-4 pt-52">
-                    <img className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out" src={item.strMealThumb} alt="" />
+                 <article key={item.idMeal} className="appear bg-gray-200 min-w-[100px] md:min-w-[100px] h-auto rounded-lg flex  flex-col transition-all duration-600 hover:scale-100 hover:bg-gray-100 group drop-shadow-md">
+                  <a href="" className="group relative flex flex-col overflow-hidden rounded-t-lg px-4 pt-52">
+                    <img className="absolute inset-0 h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out" src={item.strMealThumb} alt="" />
                   </a>
                   <article className='flex justify-between'>
                     <p className="px-2 py-2 font-semibold text-black sm:text-lg md:text-xl tracking-wide">{item.strMeal}</p>
