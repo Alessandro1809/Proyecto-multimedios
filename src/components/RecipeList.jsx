@@ -105,7 +105,7 @@ const RecipeList = () => {
                     <p className="px-2 py-2 font-semibold text-black sm:text-lg md:text-xl tracking-wide">{item.strMeal}</p>
                     <div className='p-2'></div>
                   </article>
-                  <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty"><ListAltOutlined />{item.strCategory}</p>
+                  {item.strCategory ? <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty"><ListAltOutlined/>{item.strCategory}</p> : null}
                   <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty">{item.strInstructions}</p>
                   <footer className='flex justify-between w-auto'>
                     <button className='mx-2 my-4 w-auto h-auto p-2 text-lg transition-all duration-300 md:w-40 hover:bg-orange-400 md:text-lg border border-orange-500 rounded-lg'>View Recipe</button>
