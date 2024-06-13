@@ -1,14 +1,21 @@
 import { Search } from '@material-ui/icons';
 import { useRecipe } from '../api/hooks/recipes';
 import { useEffect, useState } from 'react';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Buscador = () => {
+
   const { filtraLasRecetas, setRecipes, getAllCategories } = useRecipe();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
       const result = await getAllCategories();
+      const isValidRecipe = result.some(recipe => recipe === recipe);
+
+      if (!isValidRecipe) {
+        toast.error('Please enter a valid recipe category');
+      }
       setCategories(result);
     };
 
@@ -18,6 +25,7 @@ const Buscador = () => {
   const handleSearch = async (e) => {
     const recipe = document.querySelector('input').value;
     const result = await filtraLasRecetas(recipe);
+    
     setRecipes(result); 
   };
 

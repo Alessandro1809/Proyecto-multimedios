@@ -11,8 +11,7 @@ export const useRecipe = () => {
     const muestraTodasLasRecetas = async () => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?f=c`);
-            const { meals } = response.data;
-            console.log(recipes);
+            const { meals } = response.data;   
             return meals;
         } catch (error) {
             console.error('Error fetching the recipes:', error);
