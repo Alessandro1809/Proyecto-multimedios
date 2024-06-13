@@ -44,7 +44,6 @@ const RecipeList = () => {
 
   useEffect(() => {
     if (recipes && recipes.length > 0) {
-      console.log("recetas actualizadas",recipes);
       setMeal(recipes);
     }
     

@@ -4,15 +4,28 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { RecipeContext } from '../../context/RecipeContext.jsx';  // Asegúrate de importar el contexto adecuado
 
+
 export const useRecipe = () => {
     const { recipes, setRecipes, favs, setFavs } = useContext(RecipeContext);
-    
+    const category =[];
     const muestraTodasLasRecetas = async () => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?f=c`);
             const { meals } = response.data;
             console.log(recipes);
             return meals;
+        } catch (error) {
+            console.error('Error fetching the recipes:', error);
+            return [];
+        }
+    }
+
+    const getAllCategories = async () => {
+        try {
+            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/categories.php`);
+            const { categories } = response.data;
+            
+            return categories;
         } catch (error) {
             console.error('Error fetching the recipes:', error);
             return [];
@@ -107,6 +120,7 @@ export const useRecipe = () => {
         muestraTodasLasRecetas,
         filtraLasRecetas,
         setRecipes,
-        recipes
+        recipes,
+        getAllCategories
     };
 };
