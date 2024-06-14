@@ -11,11 +11,6 @@ const Buscador = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       const result = await getAllCategories();
-      const isValidRecipe = result.some(recipe => recipe === recipe);
-
-      if (!isValidRecipe) {
-        toast.error('Please enter a valid recipe category');
-      }
       setCategories(result);
     };
 
@@ -25,6 +20,12 @@ const Buscador = () => {
   const handleSearch = async (e) => {
     const recipe = document.querySelector('input').value;
     const result = await filtraLasRecetas(recipe);
+    const categories = await getAllCategories();  
+    
+    const isValidCategory = categories.some(category => category.strCategory === recipe);
+    if (recipe === '' || recipe === null || recipe === undefined || recipe === ' ' || !isValidCategory) {
+       toast.error('Please enter a valid recipe category');
+     }
     
     setRecipes(result); 
   };

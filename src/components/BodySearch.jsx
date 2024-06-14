@@ -20,9 +20,12 @@ const BodySearch = () => {
   const handleSearch = async (e) => {
     const recipe = document.getElementById('search').value;
     const result = await filtraLasRecetas(recipe);
-    if (recipe === '') {
-      toast.error('Please enter a valid recipe category');
-    }
+    const categories = await getAllCategories();  
+    const isValidCategory = categories.some(category => category.strCategory === recipe);
+    if (recipe === '' || recipe === null || recipe === undefined || recipe === ' ' || !isValidCategory) {
+       toast.error('Please enter a valid recipe category');
+     }
+    
     setRecipes(result); 
   };
 
