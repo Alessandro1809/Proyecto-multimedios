@@ -3,53 +3,13 @@ import { Favorite, Cancel, ListAltOutlined,NavigateNext,NavigateBefore } from '@
 import { useRecipe } from '../api/hooks/recipes';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import { useForm } from '../api/hooks/useForm';
 //pendiente revisar el bug en visualizacion de imagenes en el listado de recetas 
 const RecipeList = () => {
-  const { agregarFavoritos, existeStorage, eliminarFavoritos, muestraTodasLasRecetas, recipes} = useRecipe();
-  const [open, setOpen] = useState(false);
-  const [currentId, setCurrentId] = useState(null); 
-  const [meal, setMeal] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const { existeStorage, open, meal, currentPage, setCurrentPage,onOpenModal, onCloseModal,handleFavorite,handleDelete } = useForm();
+ 
   const recipesPerPage = 20;
  
-  const onOpenModal = (id) => {
-    setCurrentId(id); 
-    setOpen(true);
-  };
-
-  const onCloseModal = () => {
-    setCurrentId(null); 
-    setOpen(false);
-  };
-
-  const handleFavorite = (receta) => {
-    existeStorage(receta.id);
-    agregarFavoritos(receta);
-  };
-
-  const handleDelete = () => {
-    eliminarFavoritos(currentId); 
-    onCloseModal(); 
-  };
-
-  useEffect(() => {
-    const fetchRecetas = async () => {
-      const meals = await muestraTodasLasRecetas();
-      setMeal(meals);
-    };
-    
-    fetchRecetas();
-  }, []);
-
-
-  useEffect(() => {
-    if (recipes && recipes.length > 0) {
-      setMeal(recipes);
-    }
-    
-  }, [recipes]);
-
-  // Calcular las recetas que se deben mostrar en la página actual
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
   const currentRecipes = meal.slice(indexOfFirstRecipe, indexOfLastRecipe);
