@@ -1,7 +1,7 @@
 
- const RecipeInfo = () => {
+ const RecipeInfo = (params) => {
   return (
-    <div>RecipeInfo</div>
+    <div className="mt-22">RecipeInfo</div>
   )
 }
 export default RecipeInfo;

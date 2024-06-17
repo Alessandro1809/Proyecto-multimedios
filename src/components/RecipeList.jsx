@@ -4,6 +4,7 @@ import { useRecipe } from '../api/hooks/recipes';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useForm } from '../api/hooks/useForm';
+import { Link } from 'react-router-dom';
 //pendiente revisar el bug en visualizacion de imagenes en el listado de recetas 
 const RecipeList = () => {
   const { existeStorage, open, meal, currentPage, setCurrentPage,onOpenModal, onCloseModal,handleFavorite,handleDelete } = useForm();
@@ -67,7 +68,7 @@ const RecipeList = () => {
                   {item.strCategory ? <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty"><ListAltOutlined/>{item.strCategory}</p> : null}
                   <p className="mx-2 mb-2 tracking-wide line-clamp-3 text-gray-800 font-medium text-pretty">{item.strInstructions}</p>
                   <footer className='flex justify-between w-auto'>
-                    <button className='mx-2 my-4 w-auto h-auto p-2 text-lg transition-all duration-300 md:w-40 hover:bg-orange-400 md:text-lg border border-orange-500 rounded-lg'>View Recipe</button>
+                    <Link to={`/recipe/:${item.idMeal}`}><button className='mx-2 my-4 w-auto h-auto p-2 text-lg transition-all duration-300 md:w-40 hover:bg-orange-400 md:text-lg border border-orange-500 rounded-lg'>View Recipe</button></Link>
 
                     {existeStorage(item.idMeal) ? 
                       <button onClick={() => onOpenModal(item.idMeal)} className='mx-2 my-4 w-auto h-auto p-2 text-lg bg-rose-400 transition-all duration-300 md:w-40 hover:bg-rose-400/80 border-b border-rose-400 md:text-lg rounded-lg'>
