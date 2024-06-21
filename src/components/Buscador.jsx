@@ -1,29 +1,20 @@
 import { Search } from '@material-ui/icons';
 import { useRecipe } from '../api/hooks/recipes';
-import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Buscador = () => {
 
-  const { filtraLasRecetas, setRecipes, getAllCategories } = useRecipe();
-  const [categories, setCategories] = useState([]);
+  const { filtraLasRecetas, setRecipes } = useRecipe();
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const result = await getAllCategories();
-      setCategories(result);
-    };
-
-    fetchCategories();
-  }, []);
 
   const handleSearch = async (e) => {
     const recipe = document.querySelector('input').value;
     const result = await filtraLasRecetas(recipe);
    
-    if (recipe === '' || recipe === null || recipe === undefined || recipe === ' ' ) {
-       toast.error('Please enter a valid recipe');
-     }
+     if (recipe === '' || recipe === null || recipe === undefined || recipe === ' ' ) {
+        toast.error('Please enter valid information');
+        return;
+      }
     
     setRecipes(result); 
   };
@@ -33,8 +24,9 @@ const Buscador = () => {
       <div className="lg:flex justify-end w-auto md:flex sm:hidden hidden items-center">
         <input 
           type="text" 
+          pattern='[A-Za-z]'
           className="bg-gray-50 rounded-full p-2 hover:bg-white shadow-inner shadow-orange-400 w-56 h-10 placeholder:text-sm placeholder:text-center outline-none" 
-          placeholder="Filter by category" 
+          placeholder="Search recipes..." 
         />
         
         <button 
