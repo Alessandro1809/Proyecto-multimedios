@@ -1,7 +1,10 @@
+import RecipeInfo from "../components/RecipeInfo";
 
 const Recipe = () => {
   return (
-    <div>Recipe</div>
+    <>
+      <RecipeInfo/>
+    </>
   )
 }
 

@@ -33,7 +33,8 @@ export const useRecipe = () => {
 
     const filtraLasRecetas = async (recipe) => {
         try {
-            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${recipe}`);
+            recipe.toUpperCase();
+            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`);
             const { meals } = response.data;
             return meals;
         } catch (error) {
