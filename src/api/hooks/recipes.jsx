@@ -3,11 +3,36 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { RecipeContext } from '../../context/RecipeContext.jsx';  // Asegúrate de importar el contexto adecuado
+import { ContactSupportOutlined } from "@material-ui/icons";
 
 
 export const useRecipe = () => {
     const { recipes, setRecipes, favs, setFavs } = useContext(RecipeContext);
     const category =[];
+
+    const getRecipeById= async (id)=>{
+        try {
+
+            const response = await axios.get(`www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+            const {meals} = response.data
+            if (meals && !meals.some(meal => meal.idMeal === id)) {
+                return meals;    
+            }else{
+                const notify=() => toast.error('Something is wrong, the id is not found, try again', {
+                    position: "top-center",
+                    autoClose: 2500,
+                    theme: "light"
+                });
+
+                notify();
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
     const muestraTodasLasRecetas = async () => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?f=c`);
@@ -133,6 +158,7 @@ export const useRecipe = () => {
         filtraLasRecetas,
         setRecipes,
         recipes,
-        getAllCategories
+        getAllCategories,
+        getRecipeById
     };
 };
