@@ -34,9 +34,21 @@ export const useRecipe = () => {
     const filtraLasRecetas = async (recipe) => {
         try {
             recipe.toUpperCase();
+            
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`);
             const { meals } = response.data;
-            return meals;
+            if (meals && meals.some(meal => meal.strMeal.toUpperCase() === upperCaseRecipe)) {
+                return meals;
+            } else {
+                const notify = () => toast.error('Recipe not found, try something different!', {
+                    position: "top-center",
+                    autoClose: 2500,
+                    theme: "light"
+                })
+
+                notify();
+                return [];
+            }
         } catch (error) {
             console.error('Error fetching the recipes:', error);
             return [];

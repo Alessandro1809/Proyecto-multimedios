@@ -6,7 +6,11 @@ import RecipeList from "../components/RecipeList";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const MainPage = () => {
-  const notify = () => toast("¡Welcome to AllRecipes!");
+  const notify = () => toast("¡Welcome to AllRecipes!",{
+    position: "top-center",
+    autoClose: 2500,
+    theme: "light"
+  });
 
   useEffect(() => {
     notify();

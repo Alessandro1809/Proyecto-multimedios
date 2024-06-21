@@ -11,7 +11,11 @@ const Buscador = () => {
     const recipe = document.querySelector('input').value;
     const result = await filtraLasRecetas(recipe);
    
-     if (recipe === '' || recipe === null || recipe === undefined || recipe === ' ' ) {
+    const pattern = /[A-Za-z]/;
+    const isValid = recipe.match(pattern);
+
+
+     if (recipe === '' || recipe === null || recipe === undefined || recipe === ' ' || !isValid) {
         toast.error('Please enter valid information');
         return;
       }

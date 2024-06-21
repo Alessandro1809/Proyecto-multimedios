@@ -58,16 +58,18 @@ const Slider = () => {
         <div className="wrapper max-h-1500px flex overflow-x-auto pt-16 pb-4 lg:pt-40 md:pt-40 mb-12 mx-2">
           {favs.map((item) => (
              
-            <div key={item.id} className='justify-center items-center grid group'>
-              <div>
-              <button className='md:flex hidden lg:flex transition-all duration-300 opacity-0 group-hover:opacity-100 hover:bg-red-200 rounded-full p-2 bg-slate-100' onClick={() => onOpenModal(item.id)}><CloseRounded/></button>
+            <div key={item.id} className='justify-center items-center flex flex-col group'>
+              <div className='mb-2'>
+              <button className='md:flex hidden lg:flex transition-all duration-300 opacity-0 group-hover:opacity-100 hover:bg-red-200 rounded-full p-2 bg-slate-100 ' onClick={() => onOpenModal(item.id)}><CloseRounded/></button>
               </div>
               <div className="w-[110px] h-[110px] flex items-center justify-center bg-blue-400/50 rounded-full mx-2 transition-all duration-300 hover:scale-110">
                 <div className="item2 w-[100px] h-[100px] rounded-full mx-1">
                   <img src={item.img} alt="" className='w-[100px] h-[100px] rounded-full'/>
                 </div>
               </div>
-              <p className='text-center mt-2 text-pretty tracking-wide text-xs'>{item.nombre}</p>
+              <p className="text-center mt-2 tracking-wide text-xs text-nowrap mx-2">
+              {item.nombre}
+              </p>
              
             </div>
           ))}
