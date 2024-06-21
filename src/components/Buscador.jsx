@@ -9,18 +9,19 @@ const Buscador = () => {
 
   const handleSearch = async (e) => {
     const recipe = document.querySelector('input').value;
-    const result = await filtraLasRecetas(recipe);
+    
    
     const pattern = /[A-Za-z]/;
     const isValid = recipe.match(pattern);
 
-
      if (recipe === '' || recipe === null || recipe === undefined || recipe === ' ' || !isValid) {
         toast.error('Please enter valid information');
         return;
+      }else{
+        const result = await filtraLasRecetas(recipe);
+        setRecipes(result);
       }
     
-    setRecipes(result); 
   };
 
   return (
