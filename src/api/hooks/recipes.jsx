@@ -3,31 +3,26 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { RecipeContext } from '../../context/RecipeContext.jsx';  // Asegúrate de importar el contexto adecuado
-import { ContactSupportOutlined } from "@material-ui/icons";
-
-
 export const useRecipe = () => {
-    const { recipes, setRecipes, favs, setFavs } = useContext(RecipeContext);
+    const { recipes, setRecipes, favs, setFavs, individualRecipe, setIndividualRecipe} = useContext(RecipeContext);
     const category =[];
 
     const getRecipeById= async (id)=>{
         try {
 
-            const response = await axios.get(`www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
-            const {meals} = response.data
-            if (meals && !meals.some(meal => meal.idMeal === id)) {
-                return meals;    
-            }else{
-                const notify=() => toast.error('Something is wrong, the id is not found, try again', {
-                    position: "top-center",
-                    autoClose: 2500,
-                    theme: "light"
-                });
-
-                notify();
-            }
+            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+            const {idMeal,strInstructions,strMeal,strMealThumb} = response.data.meals[0];
+            console.log();
+            return setIndividualRecipe({idMeal,strInstructions,strMeal,strMealThumb});    
 
         } catch (error) {
+            const notify=() => toast.error('Something is wrong, the id is not found, try again', {
+                position: "top-center",
+                autoClose: 2500,
+                theme: "light"
+            });
+
+            notify();
             console.log(error);
         }
 
@@ -159,6 +154,8 @@ export const useRecipe = () => {
         setRecipes,
         recipes,
         getAllCategories,
-        getRecipeById
+        getRecipeById,
+        individualRecipe
+        
     };
 };
