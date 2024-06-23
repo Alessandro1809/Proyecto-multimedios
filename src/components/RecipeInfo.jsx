@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useRecipe } from "../api/hooks/recipes";
+import { Link } from "react-router-dom";
 
 const RecipeInfo = () => {
-  
+  let counter = 1;
   const { getRecipeById, individualRecipe} = useRecipe();
   const { id } = useParams();
   
@@ -12,40 +13,52 @@ const RecipeInfo = () => {
       await getRecipeById(id);
      }
      recipe();
-
+     
     }, []); 
 
+    
+
+console.log(individualRecipe);
   if (!individualRecipe) {
     return <div>Loading...</div>;
   }
   return (
     <>
-    {individualRecipe && <h2 className="pt-40">{individualRecipe.strMeal} </h2>}
-    <h2 className="pt-40"> </h2>
-      <section className="w-3/12 bg-red-300">
-      <header>boton para volver a pagina anterior donde estan las recetas</header>
-        <article>
-            categoria de la receta
-        </article>
-  
-        <article>
-            imagen de la receta
-        </article>
-          <section>
-            <article>
-                lista de ingrdientes
-            </article>
-  
-            <article>
-              instrucciones
-            </article>
-          </section>
-        <footer>
-  
-            botones de accion de eliminar de favs o agregar 
-  
-        </footer>
-      </section>
+    {individualRecipe && 
+      
+      <section className="grid justify-center ">
+        <h2 className="pt-36 text-center text-4xl tracking-wide font-bold pb-4 md:txt-5xl mx-4">{individualRecipe.strMeal} </h2>
+        
+        <div className="grid justify-center">
+          <div className="grid grid-cols-2 gap-2 p-2 text-lg font-medium justify-center">
+            
+              <img  src={individualRecipe.strMealThumb} alt={individualRecipe.strMeal} className="mx-auto w-[40%] h-auto rounded-lg drop-shadow-xl shadow-lg shadow-red-300 col-span-2 "/>
+
+              <h2 className="col-span-2 text-center text-4xl py-6">Ingredients</h2>
+              {individualRecipe.ingredients && individualRecipe.ingredients.map((ingredient) => (
+                
+                <article key={ingredient.id} className=" gap-2 p-2 text-lg font-medium bg-orange-100/45 rounded-lg col-span-2 md:col-span-1">
+                
+                  <p className=" text-center">{ingredient.ingredient}: <span className="font-bold">{ingredient.measure}</span></p>
+                  
+                </article>
+                
+              ))}
+         </div>
+         </div>
+
+          <article className="mx-20">
+            <h2 className="text-center text-4xl py-6 font-medium">Instructions</h2>
+            <p className="text-center">{individualRecipe.strInstructions}</p>
+
+            
+          </article>
+          <Link target="_blank" to={individualRecipe.strYoutube}><p className="pt-12 text-center text-blue-600 text-2xl">Watch now on YouTube!</p></Link>
+        </section>
+        
+        }
+    
+     
    
     </>
     )

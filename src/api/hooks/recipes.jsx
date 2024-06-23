@@ -2,7 +2,8 @@ import { useEffect, useContext, useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
-import { RecipeContext } from '../../context/RecipeContext.jsx';  // Asegúrate de importar el contexto adecuado
+import { RecipeContext } from '../../context/RecipeContext.jsx'; 
+import { v4 as uuidv4 } from 'uuid';
 export const useRecipe = () => {
     const { recipes, setRecipes, favs, setFavs, individualRecipe, setIndividualRecipe} = useContext(RecipeContext);
     const category =[];
@@ -11,9 +12,18 @@ export const useRecipe = () => {
         try {
 
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
-            const {idMeal,strInstructions,strMeal,strMealThumb} = response.data.meals[0];
-            console.log();
-            return setIndividualRecipe({idMeal,strInstructions,strMeal,strMealThumb});    
+            const {idMeal,strYoutube,strInstructions,strMeal,strMealThumb,...rest} = response.data.meals[0];
+            
+            let ingredients = [];
+
+            for (let i = 1; i <= 20; i++) {
+            const ingredient = rest[`strIngredient${i}`];
+            const measure = rest[`strMeasure${i}`];
+            if (ingredient && ingredient.trim() !== "") {
+                ingredients.push({id:uuidv4(), ingredient,measure });
+            }
+            }
+            return setIndividualRecipe({idMeal,strYoutube,strInstructions,strMeal,strMealThumb,ingredients});    
 
         } catch (error) {
             const notify=() => toast.error('Something is wrong, the id is not found, try again', {
