@@ -10,6 +10,7 @@ const [currentPage, setCurrentPage] = useState(1);
 const recipesPerPage = 20;
 
 const onOpenModal = (id) => {
+  console.log(id);
   setCurrentId(id); 
   setOpen(true);
 };
@@ -62,6 +63,24 @@ const handdleScrollToTop = (duration) => {
 
   requestAnimationFrame(scrollStep);
 }
+
+const handleSearch = async (e) => {
+  const recipe = document.querySelector('input').value;
+  
+ 
+  const pattern = /[A-Za-z]/;
+  const isValid = recipe.match(pattern);
+
+   if (recipe === '' || recipe === null || recipe === undefined || recipe === ' ' || !isValid) {
+      toast.error('Please enter valid information');
+      return;
+    }else{
+      const result = await filtraLasRecetas(recipe);
+      setRecipes(result);
+    }
+  
+};
+
   return {
         onOpenModal,
         onCloseModal,
@@ -76,8 +95,8 @@ const handdleScrollToTop = (duration) => {
         setMeal,
         setCurrentId,
         existeStorage,
-        handdleScrollToTop
-
+        handdleScrollToTop,
+        handleSearch
   }
 }
 

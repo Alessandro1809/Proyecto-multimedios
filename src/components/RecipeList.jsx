@@ -56,7 +56,7 @@ const RecipeList = () => {
           <div>
             <div className='p-4 grid gap-5 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 md:mx-0.5 col-auto'>
               {currentRecipes.map((item) => (
-                 <article key={item.idMeal} className="appear bg-gray-200 min-w-[100px] md:min-w-[100px] h-auto rounded-lg flex  flex-col transition-all duration-600 hover:scale-100 hover:bg-gray-100 group drop-shadow-md">
+                 <Link to={`/recipe/${item.idMeal}`}><article key={item.idMeal} className="appear bg-gray-200 min-w-[100px] md:min-w-[100px] h-auto rounded-lg flex  flex-col transition-all duration-600 hover:scale-100 hover:bg-gray-100 group drop-shadow-md">
                   <a href="" className="group relative flex flex-col overflow-hidden rounded-t-lg px-4 pt-52">
                     <img className="absolute inset-0 h-52 w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out" src={item.strMealThumb} alt="" />
                   </a>
@@ -80,6 +80,7 @@ const RecipeList = () => {
                     }
                   </footer>
                 </article>
+                </Link>
               ))}
             </div>
 

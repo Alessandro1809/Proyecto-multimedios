@@ -65,7 +65,7 @@ const Slider = () => {
               </div>
 
               <Link to={`/recipe/${item.id}`}>
-              <div className="w-[110px] h-[110px] grid items-center justify-center bg-blue-400/50 rounded-full mx-auto transition-all duration-300 hover:scale-110">
+              <div className="w-[110px] h-[110px] grid items-center justify-center bg-gradient-to-r from-rose-500  to-yellow-300 rounded-full mx-auto transition-all duration-300 hover:scale-110">
                 <div className="item2 w-[100px] h-[100px] rounded-full mx-1">
                   <img src={item.img} alt="" className='w-[100px] h-[100px] rounded-full '/>
                 </div>
