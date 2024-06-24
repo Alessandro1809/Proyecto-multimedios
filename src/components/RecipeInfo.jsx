@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useRecipe } from "../api/hooks/recipes";
 import { Link } from "react-router-dom";
-
+import { ArrowUpwardRounded, ArrowBack} from "@material-ui/icons";
+import { useForm } from "../api/hooks/useForm";
 const RecipeInfo = () => {
-  let counter = 1;
+  const {handdleScrollToTop} = useForm();
   const { getRecipeById, individualRecipe} = useRecipe();
   const { id } = useParams();
   
@@ -32,7 +33,7 @@ console.log(individualRecipe);
         <div className="grid justify-center">
           <div className="grid grid-cols-2 gap-2 p-2 text-lg font-medium justify-center">
             
-              <img  src={individualRecipe.strMealThumb} alt={individualRecipe.strMeal} className="mx-auto w-[40%] h-auto rounded-lg drop-shadow-xl shadow-lg shadow-red-300 col-span-2 "/>
+              <img  src={individualRecipe.strMealThumb} alt={individualRecipe.strMeal} className="mx-auto w-[50%] h-auto rounded-lg drop-shadow-xl shadow-lg shadow-red-300 col-span-2 "/>
 
               <h2 className="col-span-2 text-center text-4xl py-6">Ingredients</h2>
               {individualRecipe.ingredients && individualRecipe.ingredients.map((ingredient) => (
@@ -47,7 +48,7 @@ console.log(individualRecipe);
          </div>
          </div>
 
-          <article className="mx-20">
+          <article className="mx-2 md:mx-20">
             <h2 className="text-center text-4xl py-6 font-medium">Instructions</h2>
             <p className="text-center">{individualRecipe.strInstructions}</p>
 
@@ -58,8 +59,9 @@ console.log(individualRecipe);
         
         }
     
-     
-   
+    <button onClick={() => handdleScrollToTop(1100)} id="scrollToTopBtn" className="btn-flotante appear-scroll-to-top"><ArrowUpwardRounded/></button>
+    
+    <Link to = "/"><button id="scrollToTopBtn" className="btn-flotante-back"><ArrowBack/></button></Link>
     </>
     )
   }

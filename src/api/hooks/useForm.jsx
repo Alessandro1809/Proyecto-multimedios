@@ -46,7 +46,22 @@ useEffect(() => {
   
 }, [recipes]);
 
+const handdleScrollToTop = (duration) => {
+  const startPosition = window.scrollY;
+  const startTime = performance.now();
 
+  function scrollStep(currentTime) {
+      const timeOfInit = currentTime - startTime;
+      const progress = Math.min(timeOfInit / duration, 1);
+      window.scrollTo(0, startPosition * (1 - progress));
+
+      if (timeOfInit < duration) {
+          requestAnimationFrame(scrollStep);
+      }
+  }
+
+  requestAnimationFrame(scrollStep);
+}
   return {
         onOpenModal,
         onCloseModal,
@@ -60,7 +75,8 @@ useEffect(() => {
         setCurrentPage,
         setMeal,
         setCurrentId,
-        existeStorage
+        existeStorage,
+        handdleScrollToTop
 
   }
 }

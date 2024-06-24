@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
+import { ArrowUpwardRounded } from '@material-ui/icons';
 import { Favorite, Cancel, ListAltOutlined,NavigateNext,NavigateBefore } from '@material-ui/icons';
-import { useRecipe } from '../api/hooks/recipes';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useForm } from '../api/hooks/useForm';
 import { Link } from 'react-router-dom';
 //pendiente revisar el bug en visualizacion de imagenes en el listado de recetas 
 const RecipeList = () => {
-  const { existeStorage, open, meal, currentPage, setCurrentPage,onOpenModal, onCloseModal,handleFavorite,handleDelete } = useForm();
- 
+  const { existeStorage, open, meal, currentPage, setCurrentPage,onOpenModal, onCloseModal,handleFavorite,handleDelete,handdleScrollToTop } = useForm();
+  
   const recipesPerPage = 20;
  
   const indexOfLastRecipe = currentPage * recipesPerPage;
@@ -103,6 +102,8 @@ const RecipeList = () => {
             </div>
           </div>
         </section>
+        <button onClick={() => handdleScrollToTop(1100)} id="scrollToTopBtn" className="btn-flotante appear-scroll-to-top"><ArrowUpwardRounded/></button>
+       
       </main>
     </>
   );
