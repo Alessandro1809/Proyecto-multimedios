@@ -4,7 +4,10 @@ import { useRecipe } from "../api/hooks/recipes";
 import { Link } from "react-router-dom";
 import { ArrowUpwardRounded, ArrowBack} from "@material-ui/icons";
 import { useForm } from "../api/hooks/useForm";
+import { useState } from "react";
+import Loader from "./Loader";
 const RecipeInfo = () => {
+  const [loading,setLoading]= useState(true);
   const {handdleScrollToTop} = useForm();
   const { getRecipeById, individualRecipe} = useRecipe();
   const { id } = useParams();
@@ -12,22 +15,20 @@ const RecipeInfo = () => {
   useEffect( () => {
      const recipe = async () => {
       await getRecipeById(id);
+      setLoading(false);
      }
      recipe();
      
     }, []); 
 
-    
-
-console.log(individualRecipe);
   if (!individualRecipe) {
     return <div>Loading...</div>;
   }
   return (
     <>
     {individualRecipe && 
-      
-      <section className="grid justify-center ">
+      loading ? <div className="grid justify-center h-screen items-center"><Loader/></div> :
+      <section className="grid justify-center " loading='lazy'>
         <h2 className="pt-36 text-center text-4xl tracking-wide font-bold pb-4 md:txt-5xl mx-4">{individualRecipe.strMeal} </h2>
         
         <div className="grid justify-center">

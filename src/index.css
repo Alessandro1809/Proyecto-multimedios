@@ -127,7 +127,7 @@
     right: 20px;
     transition: all 300ms ease 0ms;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    z-index: 99;
+    z-index: 10;
 }
 .btn-flotante:hover {
     background-color: #549eff; 
@@ -158,7 +158,7 @@
   left: 20px; 
   transition: all 300ms ease 0ms;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  z-index: 99;
+  z-index: 10;
 }
 .btn-flotante-back:hover {
   background-color: #549eff; 
@@ -172,4 +172,72 @@
   top: 110px;
   left: 20px;
 }
+}
+
+/* Estilos del loader */
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.loader div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #f06717;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.loader div:nth-child(1) {
+  left: 8px;
+  animation: flip1 0.6s infinite;
+}
+
+.loader div:nth-child(2) {
+  left: 8px;
+  animation: flip2 0.6s infinite;
+}
+
+.loader div:nth-child(3) {
+  left: 32px;
+  animation: flip2 0.6s infinite;
+}
+
+.loader div:nth-child(4) {
+  left: 56px;
+  animation: flip3 0.6s infinite;
+}
+
+@keyframes flip1 {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes flip3 {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes flip2 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(24px, 0);
+  }
 }
