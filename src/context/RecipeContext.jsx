@@ -6,8 +6,9 @@ export const RecipeProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [favs, setFavs] = useState([]);
   const [individualRecipe, setIndividualRecipe] = useState([]);
+  const [randomMeal, setRandom] = useState([]);
   return (
-    <RecipeContext.Provider value={{ recipes, setRecipes, favs, setFavs, individualRecipe, setIndividualRecipe }}>
+    <RecipeContext.Provider value={{ recipes, setRecipes, favs, setFavs, individualRecipe, setIndividualRecipe, setRandom,randomMeal}}>
       {children}
     </RecipeContext.Provider>
   );

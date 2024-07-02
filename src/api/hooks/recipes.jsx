@@ -1,12 +1,11 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { RecipeContext } from '../../context/RecipeContext.jsx'; 
 import { v4 as uuidv4 } from 'uuid';
 export const useRecipe = () => {
-    const { recipes, setRecipes, favs, setFavs, individualRecipe, setIndividualRecipe} = useContext(RecipeContext);
-    const category =[];
+    const { recipes, setRecipes, favs, setFavs, individualRecipe, setIndividualRecipe, setRandom,randomMeal} = useContext(RecipeContext);
 
     const getRecipeById= async (id)=>{
         try {
@@ -125,16 +124,28 @@ export const useRecipe = () => {
     function existeStorage(id) {
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
         return favoritos.some(receta => receta.id === id);
-    };
+    }
 
     function obtenerFavoritos() {
         const favoritos = JSON.parse(localStorage.getItem('favoritos')) ?? [];
         return favoritos;
-    };
+    }
 
     const actualizarFavoritos = () => {
         const nuevosFavoritos = obtenerFavoritos() || [];
         setFavs(nuevosFavoritos); // Setear el estado con los nuevos favoritos
+    };
+
+    const obtenerRecetaRandom = async () => {
+        try {
+            const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/random.php`);
+            const { meals } = response.data;
+            setRandom(meals);
+            return meals;
+        } catch (error) {
+            console.error('Error fetching the recipes:', error);
+            return [];
+        }
     };
 
     useEffect(() => {
@@ -165,7 +176,9 @@ export const useRecipe = () => {
         recipes,
         getAllCategories,
         getRecipeById,
-        individualRecipe
+        individualRecipe,
+        obtenerRecetaRandom,
+        randomMeal
         
     };
 };
